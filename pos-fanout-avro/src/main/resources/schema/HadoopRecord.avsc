@@ -1,0 +1,22 @@
+{
+    "type":"record",
+    "name": "HadoopRecord",
+    "namespace":"types",
+    "fields":[
+        {"name": "InvoiceNumber", "type": "string"},
+        {"name": "CreatedTime",  "type":"long"},
+        {"name": "StoreID",  "type": "string"},
+        {"name": "PosID",  "type": "string"},
+        {"name": "CustomerType",  "type": "string"},
+        {"name": "PaymentMethod",  "type": "string"},
+        {"name": "DeliveryType",  "type": "string"},
+        {"name": "City",  "type": ["null", "string"]},
+        {"name": "State",  "type": ["null", "string"]},
+        {"name": "PinCode",  "type": ["null", "string"]},
+        {"name": "ItemCode",  "type": "string"},
+        {"name": "ItemDescription",  "type": "string"},
+        {"name": "ItemPrice",  "type": "double"},
+        {"name": "ItemQty",  "type": "int"},
+        {"name": "TotalValue",  "type": "double"}
+    ]
+}

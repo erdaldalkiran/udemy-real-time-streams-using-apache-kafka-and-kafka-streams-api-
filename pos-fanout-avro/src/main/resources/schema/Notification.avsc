@@ -1,0 +1,11 @@
+{
+    "type":"record",
+    "name": "Notification",
+    "namespace":"types",
+    "fields":[
+        {"name": "InvoiceNumber", "type": "string"},
+        {"name": "CustomerCardNo",  "type":"string"},
+        {"name": "TotalAmount",  "type": "double"},
+        {"name": "EarnedLoyaltyPoints",  "type": "double"}
+    ]
+}

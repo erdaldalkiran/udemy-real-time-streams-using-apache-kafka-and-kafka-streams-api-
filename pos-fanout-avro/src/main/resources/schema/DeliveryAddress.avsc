@@ -1,0 +1,12 @@
+{
+    "type":"record",
+    "name": "DeliveryAddress",
+    "namespace":"types",
+    "fields":[
+        {"name": "AddressLine", "type":"string"},
+        {"name": "City","type": "string"},
+        {"name": "State","type": "string"},
+        {"name": "PinCode","type": "string"},
+        {"name": "ContactNumber","type": "string"}
+    ]
+}

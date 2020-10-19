@@ -1,0 +1,12 @@
+{
+    "type":"record",
+    "name": "LineItem",
+    "namespace":"types",
+    "fields":[
+        {"name": "ItemCode","type": "string"},
+        {"name": "ItemDescription","type": "string"},
+        {"name": "ItemPrice","type": "double"},
+        {"name": "ItemQty","type": "int"},
+        {"name": "TotalValue","type": "double"}
+    ]
+}
