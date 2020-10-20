@@ -1,0 +1,24 @@
+{
+    "type":"record",
+    "name": "PosInvoice",
+    "namespace":"types",
+    "fields":[
+        {"name": "InvoiceNumber","type": "string"},
+        {"name": "CreatedTime","type": "long"},
+        {"name": "CustomerCardNo","type": "string"},
+        {"name": "TotalAmount","type": "double"},
+        {"name": "NumberOfItems","type": "int"},
+        {"name": "PaymentMethod","type": "string"},
+        {"name": "TaxableAmount","type": "double"},
+        {"name": "CGST","type": "double"},
+        {"name": "SGST","type": "double"},
+        {"name": "CESS","type": "double"},
+        {"name": "StoreID","type": "string"},
+        {"name": "PosID","type": "string"},
+        {"name": "CashierID","type": "string"},
+        {"name": "CustomerType","type": "string"},
+        {"name": "DeliveryType","type": "string"},
+        {"name": "DeliveryAddress", "type":["null", "DeliveryAddress"]},
+        {"name": "InvoiceLineItems", "type": {"type":"array", "items":"LineItem"}}
+    ]
+}
