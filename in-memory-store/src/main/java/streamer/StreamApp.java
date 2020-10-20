@@ -30,6 +30,11 @@ public class StreamApp {
 
         builder.stream(AppConfigs.posTopicName, Consumed.with(AppSerdes.String(), AppSerdes.PosInvoice()))
                 .filter((s, invoice) -> invoice.getCustomerType().toString().equalsIgnoreCase(AppConfigs.CUSTOMER_TYPE_PRIME))
+                .through(AppConfigs.rewardCalculationTopicName,
+                        Produced.with(
+                                AppSerdes.String(),
+                                AppSerdes.PosInvoice(),
+                                (topicName, key, posInvoice, partitionCount) -> posInvoice.getCustomerType().hashCode() % partitionCount))
                 .transformValues(InvoiceToNotificationTransformer::new, AppConfigs.rewardStoreName)
                 .selectKey((s, notification) -> notification.getCustomerCardNo().toString())
                 .to(AppConfigs.loyaltyTopicName, Produced.with(AppSerdes.String(), AppSerdes.Notification()));
