@@ -1,0 +1,1 @@
+{"type":"record","name":"Invoice","namespace":"types","fields":[{"name":"Number","type":"int"},{"name":"CreatedTime","type":"string"},{"name":"TotalAmount","type":"double"},{"name":"StoreID","type":"string"}]}

@@ -14,8 +14,8 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class PosInvoice extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = -4086838241679311298L;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"PosInvoice\",\"namespace\":\"types\",\"fields\":[{\"name\":\"InvoiceNumber\",\"type\":[\"null\",\"string\"]},{\"name\":\"CreatedTime\",\"type\":\"long\"},{\"name\":\"CustomerCardNo\",\"type\":\"string\"},{\"name\":\"TotalAmount\",\"type\":\"double\"},{\"name\":\"NumberOfItems\",\"type\":\"int\"},{\"name\":\"PaymentMethod\",\"type\":\"string\"},{\"name\":\"TaxableAmount\",\"type\":\"double\"},{\"name\":\"CGST\",\"type\":\"double\"},{\"name\":\"SGST\",\"type\":\"double\"},{\"name\":\"CESS\",\"type\":\"double\"},{\"name\":\"StoreID\",\"type\":\"string\"},{\"name\":\"PosID\",\"type\":\"string\"},{\"name\":\"CashierID\",\"type\":\"string\"},{\"name\":\"CustomerType\",\"type\":\"string\"},{\"name\":\"DeliveryType\",\"type\":\"string\"},{\"name\":\"DeliveryAddress\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"DeliveryAddress\",\"fields\":[{\"name\":\"AddressLine\",\"type\":\"string\"},{\"name\":\"City\",\"type\":\"string\"},{\"name\":\"State\",\"type\":\"string\"},{\"name\":\"PinCode\",\"type\":\"string\"},{\"name\":\"ContactNumber\",\"type\":\"string\"}]}]},{\"name\":\"InvoiceLineItems\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"LineItem\",\"fields\":[{\"name\":\"ItemCode\",\"type\":\"string\"},{\"name\":\"ItemDescription\",\"type\":\"string\"},{\"name\":\"ItemPrice\",\"type\":\"double\"},{\"name\":\"ItemQty\",\"type\":\"int\"},{\"name\":\"TotalValue\",\"type\":\"double\"}]}}}]}");
+  private static final long serialVersionUID = -8424283002180631423L;
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"PosInvoice\",\"namespace\":\"types\",\"fields\":[{\"name\":\"InvoiceNumber\",\"type\":\"string\"},{\"name\":\"CreatedTime\",\"type\":\"long\"},{\"name\":\"CustomerCardNo\",\"type\":\"string\"},{\"name\":\"TotalAmount\",\"type\":\"double\"},{\"name\":\"NumberOfItems\",\"type\":\"int\"},{\"name\":\"PaymentMethod\",\"type\":\"string\"},{\"name\":\"TaxableAmount\",\"type\":\"double\"},{\"name\":\"CGST\",\"type\":\"double\"},{\"name\":\"SGST\",\"type\":\"double\"},{\"name\":\"CESS\",\"type\":\"double\"},{\"name\":\"StoreID\",\"type\":\"string\"},{\"name\":\"PosID\",\"type\":\"string\"},{\"name\":\"CashierID\",\"type\":\"string\"},{\"name\":\"CustomerType\",\"type\":\"string\"},{\"name\":\"DeliveryType\",\"type\":\"string\"},{\"name\":\"DeliveryAddress\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"DeliveryAddress\",\"fields\":[{\"name\":\"AddressLine\",\"type\":\"string\"},{\"name\":\"City\",\"type\":\"string\"},{\"name\":\"State\",\"type\":\"string\"},{\"name\":\"PinCode\",\"type\":\"string\"},{\"name\":\"ContactNumber\",\"type\":\"string\"}]}]},{\"name\":\"InvoiceLineItems\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"LineItem\",\"fields\":[{\"name\":\"ItemCode\",\"type\":\"string\"},{\"name\":\"ItemDescription\",\"type\":\"string\"},{\"name\":\"ItemPrice\",\"type\":\"double\"},{\"name\":\"ItemQty\",\"type\":\"int\"},{\"name\":\"TotalValue\",\"type\":\"double\"}]}}}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static SpecificData MODEL$ = new SpecificData();
@@ -1468,13 +1468,7 @@ public class PosInvoice extends org.apache.avro.specific.SpecificRecordBase impl
   @Override public void customEncode(org.apache.avro.io.Encoder out)
     throws java.io.IOException
   {
-    if (this.InvoiceNumber == null) {
-      out.writeIndex(0);
-      out.writeNull();
-    } else {
-      out.writeIndex(1);
-      out.writeString(this.InvoiceNumber);
-    }
+    out.writeString(this.InvoiceNumber);
 
     out.writeLong(this.CreatedTime);
 
@@ -1532,12 +1526,7 @@ public class PosInvoice extends org.apache.avro.specific.SpecificRecordBase impl
   {
     org.apache.avro.Schema.Field[] fieldOrder = in.readFieldOrderIfDiff();
     if (fieldOrder == null) {
-      if (in.readIndex() != 1) {
-        in.readNull();
-        this.InvoiceNumber = null;
-      } else {
-        this.InvoiceNumber = in.readString(this.InvoiceNumber instanceof Utf8 ? (Utf8)this.InvoiceNumber : null);
-      }
+      this.InvoiceNumber = in.readString(this.InvoiceNumber instanceof Utf8 ? (Utf8)this.InvoiceNumber : null);
 
       this.CreatedTime = in.readLong();
 
@@ -1599,12 +1588,7 @@ public class PosInvoice extends org.apache.avro.specific.SpecificRecordBase impl
       for (int i = 0; i < 17; i++) {
         switch (fieldOrder[i].pos()) {
         case 0:
-          if (in.readIndex() != 1) {
-            in.readNull();
-            this.InvoiceNumber = null;
-          } else {
-            this.InvoiceNumber = in.readString(this.InvoiceNumber instanceof Utf8 ? (Utf8)this.InvoiceNumber : null);
-          }
+          this.InvoiceNumber = in.readString(this.InvoiceNumber instanceof Utf8 ? (Utf8)this.InvoiceNumber : null);
           break;
 
         case 1:
