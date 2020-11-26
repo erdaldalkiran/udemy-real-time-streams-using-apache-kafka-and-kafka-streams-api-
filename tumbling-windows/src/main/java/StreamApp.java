@@ -1,4 +1,3 @@
-import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.streams.KafkaStreams;
 import org.apache.kafka.streams.StreamsBuilder;
 import org.apache.kafka.streams.StreamsConfig;
@@ -17,7 +16,7 @@ public class StreamApp {
         props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, AppConfigs.bootstrapServers);
 
         var builder = new StreamsBuilder();
-        KStream<String, Invoice> invStream = builder.stream(AppConfigs.posTopicName,
+        KStream<String, Invoice> invStream = builder.stream(AppConfigs.topicName,
             Consumed.with(AppSerdes.String(), AppSerdes.Invoice())
                 .withTimestampExtractor(new InvoiceTimeExtractor()));
 
@@ -25,10 +24,11 @@ public class StreamApp {
             .groupByKey()
             .windowedBy(TimeWindows.of(Duration.ofMinutes(5)).grace(Duration.ofSeconds(10)))
             .count();
+        // didn't work
 //            .suppress(Suppressed.untilTimeLimit(Duration.ofSeconds(10), Suppressed.BufferConfig.maxBytes(100000).emitEarlyWhenFull()));
 
         storeInvoiceCount.toStream().foreach((wKey, value) -> {
-            System.out.println( "Store ID: " + wKey.key() + " Window ID: " + wKey.window().hashCode() +
+            System.out.println("Store ID: " + wKey.key() + " Window ID: " + wKey.window().hashCode() +
                 " Window start: " + Instant.ofEpochMilli(wKey.window().start()).atOffset(ZoneOffset.UTC) +
                 " Window end: " + Instant.ofEpochMilli(wKey.window().end()).atOffset(ZoneOffset.UTC) +
                 " Count: " + value);
@@ -41,6 +41,5 @@ public class StreamApp {
             System.out.println("Stopping Streams");
             stream.close();
         }));
-
     }
 }
