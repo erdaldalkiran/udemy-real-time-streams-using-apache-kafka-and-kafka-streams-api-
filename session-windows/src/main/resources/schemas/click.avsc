@@ -1,0 +1,11 @@
+{
+    "type":"record",
+    "name": "Click",
+    "namespace":"types",
+    "fields":[
+        {"name": "UserID","type": "string"},
+        {"name": "CreatedTime","type": "string"},
+        {"name": "CurrentLink","type": "string"},
+        {"name": "NextLink","type": "string"}
+    ]
+}

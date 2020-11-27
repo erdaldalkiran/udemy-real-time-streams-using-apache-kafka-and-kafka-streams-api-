@@ -2,7 +2,7 @@ import org.apache.kafka.streams.KafkaStreams;
 import org.apache.kafka.streams.StreamsBuilder;
 import org.apache.kafka.streams.StreamsConfig;
 import org.apache.kafka.streams.kstream.*;
-import types.Invoice;
+import types.Click;
 
 import java.time.Duration;
 import java.time.Instant;
@@ -17,20 +17,20 @@ public class StreamApp {
         props.put(StreamsConfig.COMMIT_INTERVAL_MS_CONFIG, 0);
 
         var builder = new StreamsBuilder();
-        KStream<String, Invoice> invStream = builder.stream(AppConfigs.topicName,
-            Consumed.with(AppSerdes.String(), AppSerdes.Invoice())
-                .withTimestampExtractor(new InvoiceTimeExtractor()));
+        KStream<String, Click> clickStream = builder.stream(AppConfigs.topicName,
+                Consumed.with(AppSerdes.String(), AppSerdes.Click())
+                        .withTimestampExtractor(new ClickTimeExtractor()));
 
-        KTable<Windowed<String>, Long> storeInvoiceCount = invStream
-            .groupByKey()
-            .windowedBy(TimeWindows.of(Duration.ofMinutes(5)).grace(Duration.ofSeconds(10)))
-            .count();
+        KTable<Windowed<String>, Long> clickCounts = clickStream
+                .groupByKey()
+                .windowedBy(SessionWindows.with(Duration.ofMinutes(5)))
+                .count();
 
-        storeInvoiceCount.toStream().foreach((wKey, value) -> {
-            System.out.println("Store ID: " + wKey.key() + " Window ID: " + wKey.window().hashCode() +
-                " Window start: " + Instant.ofEpochMilli(wKey.window().start()).atOffset(ZoneOffset.UTC) +
-                " Window end: " + Instant.ofEpochMilli(wKey.window().end()).atOffset(ZoneOffset.UTC) +
-                " Count: " + value);
+        clickCounts.toStream().foreach((wKey, value) -> {
+            System.out.println("User ID: " + wKey.key() + " Window ID: " + wKey.window().hashCode() +
+                    " Window start: " + Instant.ofEpochMilli(wKey.window().start()).atOffset(ZoneOffset.UTC) +
+                    " Window end: " + Instant.ofEpochMilli(wKey.window().end()).atOffset(ZoneOffset.UTC) +
+                    " Count: " + value);
         });
 
         var stream = new KafkaStreams(builder.build(), props);
