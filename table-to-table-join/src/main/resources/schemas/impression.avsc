@@ -1,0 +1,8 @@
+{
+    "type":"record",
+    "name": "Impression",
+    "namespace":"types",
+    "fields":[
+        {"name": "CampaignerID","type": "string"}
+    ]
+}

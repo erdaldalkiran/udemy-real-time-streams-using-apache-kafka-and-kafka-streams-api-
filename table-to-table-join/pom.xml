@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.example</groupId>
-    <artifactId>stream-table-join-and-aggregation</artifactId>
+    <artifactId>table-to-table</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
@@ -67,13 +67,11 @@
                         <configuration>
                             <sourceDirectory>${project.basedir}/src/main/resources/schemas/</sourceDirectory>
                             <outputDirectory>${project.basedir}/src/main/java/</outputDirectory>
-                            <imports>
-                                <import>${project.basedir}/src/main/resources/schemas/InventoryClicks.avsc</import>
-                            </imports>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
         </plugins>
     </build>
+
 </project>
