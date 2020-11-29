@@ -1,0 +1,8 @@
+{
+    "type":"record",
+    "name": "InventoryClickList",
+    "namespace":"types",
+    "fields":[
+        {"name": "Items","type": { "type":"array", "items":"InventoryClick"}}
+    ]
+}

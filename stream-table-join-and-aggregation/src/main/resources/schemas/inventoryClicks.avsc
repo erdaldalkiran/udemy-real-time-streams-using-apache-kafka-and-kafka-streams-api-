@@ -1,0 +1,9 @@
+{
+    "type":"record",
+    "name": "InventoryClick",
+    "namespace":"types",
+    "fields":[
+        {"name": "InventoryID","type": "string"},
+        {"name": "ClickCount","type": "long"}
+    ]
+}
