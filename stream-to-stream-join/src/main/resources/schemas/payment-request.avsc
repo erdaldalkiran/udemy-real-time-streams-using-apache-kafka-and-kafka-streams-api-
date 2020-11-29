@@ -1,0 +1,13 @@
+{
+    "type":"record",
+    "name": "PaymentRequest",
+    "namespace":"types",
+    "fields":[
+        {"name": "TransactionID","type": "string"},
+        {"name": "CreatedTime","type": "string"},
+        {"name": "SourceAccountID","type": "string"},
+        {"name": "TargetAccountID","type": "string"},
+        {"name": "Amount","type": "double"},
+        {"name": "OTP","type": "int"}
+    ]
+}

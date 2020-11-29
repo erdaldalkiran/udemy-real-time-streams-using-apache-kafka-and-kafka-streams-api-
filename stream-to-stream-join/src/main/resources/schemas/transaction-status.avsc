@@ -1,0 +1,9 @@
+{
+    "type":"record",
+    "name": "TransactionStatus",
+    "namespace":"types",
+    "fields":[
+        {"name": "TransactionID","type": "string"},
+        {"name": "Status","type": "string"}
+    ]
+}

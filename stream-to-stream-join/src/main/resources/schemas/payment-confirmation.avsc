@@ -1,0 +1,10 @@
+{
+    "type":"record",
+    "name": "PaymentConfirmation",
+    "namespace":"types",
+    "fields":[
+        {"name": "TransactionID","type": "string"},
+        {"name": "CreatedTime","type": "string"},
+        {"name": "OTP","type": "int"}
+    ]
+}
