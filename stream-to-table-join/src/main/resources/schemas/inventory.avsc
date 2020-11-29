@@ -1,0 +1,9 @@
+{
+    "type":"record",
+    "name": "Inventory",
+    "namespace":"types",
+    "fields":[
+        {"name": "InventoryID","type": "string"},
+        {"name": "NewsType","type": "string"}
+    ]
+}
