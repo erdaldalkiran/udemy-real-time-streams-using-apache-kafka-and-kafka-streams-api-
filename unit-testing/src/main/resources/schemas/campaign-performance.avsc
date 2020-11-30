@@ -1,0 +1,10 @@
+{
+    "type":"record",
+    "name": "CampaignPerformance",
+    "namespace":"types",
+    "fields":[
+            {"name": "Campaigner","type": "string"},
+            {"name": "ImpressionCount","type": "long"},
+            {"name": "ClickCount","type": "long"}
+     ]
+}

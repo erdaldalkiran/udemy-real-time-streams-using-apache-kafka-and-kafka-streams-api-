@@ -1,0 +1,1 @@
+{"type":"record","name":"Click","namespace":"types","fields":[{"name":"ImpressionID","type":"string"},{"name":"Campaigner","type":"string"}]}
