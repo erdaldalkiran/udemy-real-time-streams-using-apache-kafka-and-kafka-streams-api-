@@ -6,12 +6,8 @@ spring:
       kafka:
         streams:
           binder:
-            application-id: fk-example-5
+            application-id: fk-example-17
             brokers: localhost:19092,localhost:29092,localhost:39092
             deserialization-exception-handler: logandcontinue
             configuration:
               commit.interval.ms: 1000
-              listing.topic.name: listing
-              buybox.topic.name: buybox
-              product.topic.name: product
-              enhanced-listing.topic.name: enhanced-listing
