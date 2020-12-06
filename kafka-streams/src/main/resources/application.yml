@@ -1,0 +1,25 @@
+spring:
+  profiles:
+    active: default
+  kafka:
+    producer:
+      properties:
+        spring:
+          json:
+            add:
+              type:
+                headers=false
+  cloud:
+    stream:
+      kafka:
+        streams:
+          binder:
+            application-id: kafka-stream-poc-7
+            brokers: localhost:19092,localhost:29092,localhost:39092
+            deserialization-exception-handler: logandcontinue
+            configuration:
+              commit.interval.ms: 1000
+
+
+
+
