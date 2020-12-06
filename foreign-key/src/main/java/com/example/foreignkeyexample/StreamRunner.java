@@ -1,11 +1,13 @@
 package com.example.foreignkeyexample;
 
+import com.example.foreignkeyexample.types.EnhancedListing;
 import org.apache.kafka.streams.KafkaStreams;
 import org.apache.kafka.streams.StreamsBuilder;
 import org.apache.kafka.streams.StreamsConfig;
 import org.apache.kafka.streams.errors.LogAndContinueExceptionHandler;
 import org.apache.kafka.streams.kstream.Consumed;
-import org.apache.kafka.streams.kstream.Printed;
+import org.apache.kafka.streams.kstream.Materialized;
+import org.apache.kafka.streams.kstream.Produced;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
 import org.springframework.stereotype.Service;
@@ -49,7 +51,30 @@ public class StreamRunner {
 
         var streamBuilder = new StreamsBuilder();
         var listingTable = streamBuilder.table(listingTopicName, Consumed.with(AppSerdes.UUID(), AppSerdes.Listing()));
-        listingTable.toStream().print(Printed.toSysOut());
+        var productTable = streamBuilder.table(productTopicName, Consumed.with(AppSerdes.String(), AppSerdes.Product()));
+        var buyboxTable = streamBuilder.table(buyboxTopicName, Consumed.with(AppSerdes.UUID(), AppSerdes.Buybox()));
+
+        var listingWithProductInfo = listingTable.leftJoin(
+            productTable,
+            listing -> listing.Sku,
+            (listing, product) -> {
+                var enhancedListing = new EnhancedListing();
+                enhancedListing.ID = listing.ID;
+                enhancedListing.Sku = listing.Sku;
+                enhancedListing.ProductName = product == null ? "no-name" : product.Name;
+                return enhancedListing;
+            },
+            Materialized.with(AppSerdes.UUID(), AppSerdes.EnhancedListing()));
+
+        var enhancedListingTable = listingWithProductInfo.leftJoin(
+            buyboxTable,
+            (enhancedListing, buybox) -> {
+                enhancedListing.BuyboxOrder = buybox == null ? 99 : buybox.Order;
+                return enhancedListing;
+            }
+        );
+
+        enhancedListingTable.toStream().to(enhancedListingTopicName, Produced.with(AppSerdes.UUID(), AppSerdes.EnhancedListing()));
 
         var topology = streamBuilder.build();
         var stream = new KafkaStreams(topology, props);
