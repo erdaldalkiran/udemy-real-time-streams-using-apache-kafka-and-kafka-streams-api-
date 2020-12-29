@@ -14,7 +14,7 @@ spring:
       kafka:
         streams:
           binder:
-            application-id: kafka-stream-poc-7
+            application-id: kafka-stream-poc
             brokers: localhost:19092,localhost:29092,localhost:39092
             deserialization-exception-handler: logandcontinue
             configuration:

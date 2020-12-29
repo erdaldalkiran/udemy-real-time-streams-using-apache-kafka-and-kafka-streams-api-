@@ -6,7 +6,7 @@ spring:
       kafka:
         streams:
           binder:
-            application-id: fk-example-17
+            application-id: fk-example-1
             brokers: localhost:19092,localhost:29092,localhost:39092
             deserialization-exception-handler: logandcontinue
             configuration:
